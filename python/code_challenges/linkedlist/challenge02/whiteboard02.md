@@ -1,0 +1,1 @@
+![white_board](../challenge02/2.png)
