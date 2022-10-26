@@ -1,0 +1,1 @@
+![WhiteBoard](../linkedlist/Whiteboard03.jpg)
