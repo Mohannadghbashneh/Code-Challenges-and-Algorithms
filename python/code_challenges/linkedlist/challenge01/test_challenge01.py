@@ -1,77 +1,73 @@
+# Write your test here
 import pytest
-from challenge01 import Solution
-
-
+from challenge01 import delete_node
+# #################### Node class #################### #  
 class Node:
+    "A Class that creates node with pointer refers to None"
     def __init__(self,value):
-        self.value=value
-        self.next=None
-    
+        self.value = value
+        self.next = None
+
+# #################### LinkedList class #################### #  
+
 class LinkedList:
+    '''
+    A Class that creates a linked list and handles its nodes :
+    1. append method to append a new node into a linked list  
+    2. all_nodes method returns all nodes as a List 
+    '''
     def __init__(self):
-        self.head=None
-        self.length=0
-    def append(self,value):
-        new_node= Node(value)
-        if self.head==None:
-            self.head=new_node
+        self.head = None
+    def append(self, node):
+        if self.head is None:
+            self.head = node
         else:
-            current=self.head
-            while current.next != None:
-                current=current.next
-            current.next=new_node
-        self.length +=1
+            current = self.head
+            while current.next is not None:
+                current = current.next
+            current.next = node
 
-    def get_node(self,value):
-        current=self.head
-        while current.value != value:
-            current=current.next
-        return current
-
-    def print_list_of_values(self):
-        values_in_list=[]
-        if self.head==None:
-            print("empty linked list")
+    def all_nodes(self):
+        list_of_nodes=[]
+        if self.head is None:
+            print("The linked list is empty")
         else:
-            current=self.head
-            while current != None:
-                values_in_list.append(current.value)
-                current=current.next
-            print(self.length)
-        return values_in_list
+            current = self.head
+            while current is not None:
+                list_of_nodes.append(current.value)
+                current = current.next
+        return list_of_nodes
+        
 
-########### Test 01 ###########
-link1= LinkedList()
-link1.append(4)
-link1.append(5)
-link1.append(1)
-link1.append(9)
+def test_delete_last_node(linkedlist_test,node_test):
+    linkedlist_test.append(node_test[0])
+    assert delete_node(node_test[0]) =="Sorry we can not delete the last node!!"
+    linkedlist_test.append(node_test[3])
+    assert delete_node(node_test[3]) =="Sorry we can not delete the last node!!" 
+    linkedlist_test.append(node_test[1])
+    linkedlist_test.append(node_test[2])
+    delete_node(node_test[3])
+    assert delete_node(node_test[3]) =="the node is deleted!!"
 
-def test_delete_node_one(one):
-    expected=[4,1,9]
-    node_to_delete= link1.get_node(5)
-    one.delete_node(node_to_delete)
-    list_after_deleted_node= link1.print_list_of_values()
-    actual= list_after_deleted_node
-    assert actual==expected
 
-########### Test 02 ###########
-link2= LinkedList()
-link2.append(4)
-link2.append(5)
-link2.append(1)
-link2.append(9)
+def test_all_nodes(linkedlist_test,node_test):
+    assert linkedlist_test.all_nodes()==[]
+    for i in range(len(node_test)):
+        linkedlist_test.append(node_test[i])  
+    assert linkedlist_test.all_nodes()==[1,2,3,4]
 
-def test_delete_node_two(one):
-    expected=[4,5,9]
-    node_to_delete_02= link2.get_node(1)
-    one.delete_node(node_to_delete_02)
-    list_after_deleted_node= link2.print_list_of_values()
-    actual= list_after_deleted_node
-    assert actual==expected
 
-########### Fixture Test ###########
+# #################### Fixtures #################### #  
+
 @pytest.fixture
-def one():
-    delete_node_method= Solution()
-    return delete_node_method
+def linkedlist_test():
+    linkedList = LinkedList()
+    return linkedList
+
+@pytest.fixture
+def node_test():
+    node1=Node(1)
+    node2=Node(2)
+    node3=Node(3)
+    node4=Node(4)
+    return [node1,node2,node3,node4]
