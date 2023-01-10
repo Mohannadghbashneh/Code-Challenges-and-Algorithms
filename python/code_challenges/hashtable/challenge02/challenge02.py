@@ -1,11 +1,10 @@
 # Write here the code challenge solution
-from collections import Counter
- 
-def first_word_Repeat(input):
-    list = input.split(' ')
-    dict = Counter(list)
-    for key in list:
-        if dict[key]>1:
-            return key
+def first_repeated_word(str1):
+  l=str1.split()
+  temp = set()
+  for word in l:
+    if word in temp:
+      return word
     else:
-     return 'No Repetition'
+      temp.add(word)
+  return 'No Repetition'

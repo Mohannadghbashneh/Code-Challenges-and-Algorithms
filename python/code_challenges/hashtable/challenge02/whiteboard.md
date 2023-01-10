@@ -1,1 +1,1 @@
-![image](./ch2.png)
+![image](./hashtable2.jpg)
