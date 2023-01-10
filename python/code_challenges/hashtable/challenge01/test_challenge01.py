@@ -1,32 +1,24 @@
-
-# Write your test here
 import pytest
+from challenge01 import find, Tree
 
-from challenge01 import TreeNode, findTarget
 
-def test_zero():
-  
-  test = TreeNode(7)
-  test.right = TreeNode(2)
-  test.left = TreeNode(9)
-  
-  actual= findTarget(test,11)
-  excepted= True
-  assert excepted == actual
 
-def test_one():
-  
-  test = TreeNode(7)
-  test.right = TreeNode(2)
-  test.left = TreeNode(9)
-  
-  actual= findTarget(test,1)
-  excepted= False
-  assert excepted == actual
-  
-def test_tow():
-  
-  test = TreeNode()
-  actual= findTarget(test,7)
-  excepted= False
-  assert excepted == actual
+def test_find_sum():
+    tree=Tree()
+    tree.root = Tree(7)
+    tree.root.left = Tree(4)
+    tree.root.right = Tree(8)           
+    tree.root.right.right = Tree(10)
+    tree.root.left.right = Tree(5)
+    tree.root.left.left = Tree(2)    
+    assert find(tree.root, 20)==False
+
+def test_find_sum_TRUE():
+    tree=Tree()
+    tree.root = Tree(7)
+    tree.root.left = Tree(4)
+    tree.root.right = Tree(8)
+    tree.root.right.right = Tree(10)
+    tree.root.left.right = Tree(5)
+    tree.root.left.left = Tree(2)    
+    assert find(tree.root, 13)==True
